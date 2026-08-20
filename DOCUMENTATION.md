@@ -11,6 +11,9 @@
 - Verified database connection successfully via `app/database.py`
 
 ## Day 2 — Database Models
+- Fixed indentation errors in `migrations/env.py` from copy-paste formatting
+- Successfully ran first migration: created `users`, `user_profiles`, and 
+  `scholarships` tables in Neon (migration id: a62f4274cfeb)
 - Created `app/database.py`: SQLAlchemy engine, session, and Base setup
 - Created `app/models/user.py`: `User` model (id, name, email, password_hash, created_at)
 - Created `app/models/profile.py`: `UserProfile` model (academic info, preferences, 
