@@ -21,3 +21,21 @@
 - Created `app/models/scholarship.py`: `Scholarship` model (name, university, country, 
   eligibility, deadlines, documents, etc.)
 - Initialized Alembic for migrations (`alembic init migrations`)
+
+## Day 3 — Authentication
+- Created `app/routes/auth.py`: `/auth/register` and `/auth/login` endpoints
+  - Passwords hashed with bcrypt via passlib
+  - JWT access tokens issued on login (python-jose, HS256, 24hr expiry)
+- Fixed a misplaced `routes` folder (auth.py had landed inside `app/models/routes/` 
+  instead of `app/routes/`) — moved it and added the missing `__init__.py`
+- Fixed a bcrypt version incompatibility with passlib by pinning `bcrypt==4.0.1`
+- Fixed missing `email-validator` dependency required by Pydantic's `EmailStr`
+- Tested `/auth/register` and `/auth/login` successfully via Swagger UI (`/docs`)
+- Created `app/routes/profile.py`: added a protected `/profile/me` route
+- Switched the auth scheme from `OAuth2PasswordBearer` to `HTTPBearer`, since 
+  Swagger's default login form (username/password) didn't match the JSON-based 
+  `/auth/login` endpoint — this let `/docs` "Authorize" accept a pasted token directly
+- Registered the `profile` router in `app/main.py`
+- Tested `/profile/me` successfully with a valid bearer token — returns the logged-in 
+  user's id, name, and email
+- Committed and pushed all changes
